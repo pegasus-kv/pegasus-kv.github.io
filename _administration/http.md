@@ -7,19 +7,19 @@ menubar: administration_menu
 
 # 功能目标
 
-Pegasus为meta服务器和replication服务器提供了HTTP接口，用于查看集群相关信息，查询服务器信息等。
+Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相关信息，查询服务器信息等。
 
 # 接口介绍
 
-接口共分为服务器信息查询、表管理和节点管理三类，其中服务器信息查询类中的指令同时支持replication服务器和meta服务器的调用，其它指令支持meta服务器。
+接口共分为服务器信息查询、表管理和节点管理三类，其中服务器信息查询类中的指令同时支持对ReplicaServer和MetaServer的访问，其它指令支持MetaServer。
 
-当访问备用meta服务器的表管理和节点管理类接口时，由于相关信息保存在主meta服务器中，因此会自动重定向至主meta服务器对应的接口。
+当访问备用MetaServer的表管理和节点管理类接口时，由于相关信息保存在主MetaServer中，会自动重定向至主MetaServer对应的接口。
 
 所有接口均返回JSON格式。
 
 ## 服务器信息查询类
 
-- **ip/port/version**
+- **ip:port/version**
 
   - 功能：获取应用的版本号和GIT_COMMIT代码
 
@@ -39,13 +39,13 @@ Pegasus为meta服务器和replication服务器提供了HTTP接口，用于查看
 
     
 
-- **ip/port/recentStartTime**
+- **ip:port/startTime**
 
   - 功能：  获取进程启动时间
 
   - 示例：
 
-    - URL：127.0.0.1:34801/recentStartTime
+    - URL：127.0.0.1:34801/startTime
     - 返回：
 
     ```json
@@ -60,19 +60,19 @@ Pegasus为meta服务器和replication服务器提供了HTTP接口，用于查看
 
 ## 表管理类
 
-- **ip:port/meta/app**
+- **ip:port/meta/app?name=xxx**
 
   - 功能：获取某个表的基本信息。
 
   - 参数：
 
-    - app_name
+    - name
 
       ​	待查的app名称
 
   - 示例：
 
-    - URL：127.0.0.1:34601/meta/app?app_name=temp
+    - URL：127.0.0.1:34601/meta/app?name=temp
     - 返回：
 
     ```json
