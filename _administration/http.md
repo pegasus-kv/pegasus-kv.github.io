@@ -134,7 +134,7 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
     ​				- meta_function_level：负载均衡策略。
 
-    ​				- balance_operation_count：负载均衡操作统计，包括move_pri、move_pri、copy_sec、				   total。
+    ​				- balance_operation_count：负载均衡操作统计，包括move_pri、move_pri、copy_sec、total。
 
     ​				- primary_replica_count_stddev：负载均衡衡量指标。
 
@@ -145,7 +145,7 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
     ```json
     {
     	cluster_info: {
-    		meta_servers: 			"10.239.35.160:34601,10.239.35.160:34602,10.239.35.160:34603",
+    		meta_servers: "10.239.35.160:34601,10.239.35.160:34602,10.239.35.160:34603",
     		primary_meta_server: "10.239.35.160:34601",
     		zookeeper_hosts: "127.0.0.1:22181",
     		zookeeper_root: "/pegasus/onebox/10.239.35.160",
