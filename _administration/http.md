@@ -21,7 +21,7 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
 - **ip:port/version**
 
-  - 功能：获取应用的版本号和GIT_COMMIT代码
+  - 功能：获取应用的版本号和GIT_COMMIT ID
 
   - 示例：
 
@@ -60,7 +60,7 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
 ## 表管理类
 
-- **ip:port/meta/app?name=xxx**
+- **ip:port/meta/app?name=xxx&detail=xxx**
 
   - 功能：获取某个表的基本信息。
 
@@ -69,12 +69,16 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
     - name
 
       ​	待查的app名称
+    
+    - detail
 
-  - 示例：
-
+      ​	取值为true时返回详细信息；false则仅返回基本信息。默认为false。
+  
+- 示例：
+  
     - URL：127.0.0.1:34601/meta/app?name=temp
     - 返回：
-
+    
     ```json
     {
     	general: {
@@ -88,15 +92,21 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
 
 
-- **ip:port/meta/apps**
+- **ip:port/meta/apps?detail=xxx**
 
   - 功能：获取所有表的列表。
 
-  - 示例：
+  - 参数：
 
+    - detail
+  
+    ​	取值为true时返回详细信息；false则仅返回基本信息。默认为false。
+  
+  - 示例：
+  
     - URL：127.0.0.1:34601/meta/apps
     - 返回：
-
+  
     ```json
     {
     	general_info: {
@@ -113,13 +123,13 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
     			drop_expire: "-",
     			envs_count: "0"
     		}
-    	},
+  	},
     	summary: {
     		total_app_count: "1"
     	}
     }
     ```
-
+  
     
 
 ## 节点管理类
@@ -140,7 +150,10 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
     ​				- total_replica_count_stddev：负载均衡衡量指标。
 
-  - 返回格式：
+  - 示例：
+
+    - URL：127.0.0.1:34601/meta/cluster
+    - 返回：
 
     ```json
     {
@@ -159,12 +172,21 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
 
     
 
-- **ip:port/meta/nodes**
+- **ip:port/meta/nodes?detail=xxx**
 
   - 功能：获取replica节点列表，以IP地址表示各个节点，并输出基本信息。
 
-  - 返回格式：
+  - 参数：
 
+    - detail
+  
+      ​	取值为true时返回详细信息；false则仅返回基本信息。默认为false。
+  
+  - 示例：
+  
+    - URL：127.0.0.1:34601/meta/nodes
+    - 返回：
+    
     ```json
     {
     	details: {
@@ -179,14 +201,14 @@ Pegasus为MetaServer和ReplicaServer提供了HTTP接口，用于查看集群相�
     		10.239.35.160:34803: {
     			address: "10.239.35.160:34803",
     			status: "ALIVE"
-    		}
+  			}
     	},
     	summary: {
     		total_node_count: "3",
     		alive_node_count: "3",
     		unalive_node_count: "0"
-    	}
+  	}
     }
     ```
-
+    
     
