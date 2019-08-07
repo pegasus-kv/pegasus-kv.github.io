@@ -12,7 +12,9 @@ menubar: administration_menu
 
 ## Prometheus安装与使用
 详情见[https://prometheus.io/docs/prometheus/latest/getting_started/](https://prometheus.io/docs/prometheus/latest/getting_started/)进行安装，即 Prometheus server
+
 **注意**
+
 因为后续要安装pushgateway,在prometheus.yml中添加
 ```
 - job_name: 'pushgateway'
@@ -33,13 +35,13 @@ menubar: administration_menu
 进入网址[localhost:9090](http://localhost:9090)看到如下界面即表示到这一步为止是成功的
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190723181055361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)在Expression框内输入需要查找的内容，点击Excute即可在Element中展示查找到的内容，当选择Graph时可以显示该内容一段时间内数值变化情况。
 
-
-
 ## Prometheus-cpp Client 安装与使用
 详情见[https://prometheus.io/docs/instrumenting/clientlibs/](https://prometheus.io/docs/instrumenting/clientlibs/)
 该网址内部含有prometheus提供的各种语言的客户端代码，按照个人选择使用，这里选择使用C++
 点击进入[https://github.com/jupp0r/prometheus-cpp](https://github.com/jupp0r/prometheus-cpp)，按照指定步骤构建即可使用
+
 **注意**
+
 如果选择通过CMAKE的方式进行构建，请使用git clone的方式获取代码（如下）
 
 ```
@@ -51,6 +53,7 @@ git clone https://github.com/jupp0r/prometheus-cpp
 make -j 4
 ```
 原则上已经实现了构建的过程，此后在文件夹prometheus-cpp/_build/pull/tests/integration中可以看到sample_server以及在prometheus-cpp/_build/push/tests/integration中可以看到sample_client
+
  **Prometheus有两种收集数据的方式:**
 
  1. Prometheus server 定期从配置好的 jobs 或者 exporters 中拉 metrics
@@ -386,7 +389,5 @@ Accept              application/json
 
 ## TODO
 添加脚本文件，使得直接运行脚本文件即可成功创建Dashboard和panel，不用再使用类似postman等工具帮助执行，同时需要将json文件中需要的内容补充完整。当前json文件中的部分数据在测试阶段没有接收到，后续可能要测试一下是否可以。
-
-
 
 我们正在开发其他类型的可视化监控工具，以更好地帮助用户管理集群，敬请期待。
