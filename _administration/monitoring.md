@@ -144,9 +144,11 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 ![grafana-login](/assets/images/grafana-login.png)
 
 登录进去之后在页面左边选择设置选择Data Sources
+
 ![grafana-dataSource](/assets/images/grafana-dataSource.png)
 
 点击add data source,选择Prometheus
+
 ![grafana-addDataSource](/assets/images/grafana-addDataSource.png)
 
 进行如下配置，然后保存
