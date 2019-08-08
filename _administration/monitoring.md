@@ -140,7 +140,9 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 ```
 
 启动之后打开[localhost:3000](http://localhost:3000)即可进入Grafana界面如下图所示（初始用户名/密码为admin/admin）
+
 ![grafana-login](/assets/images/grafana-login.png)
+
 登录进去之后在页面左边选择设置选择Data Sources
 ![grafana-dataSource](/assets/images/grafana-dataSource.png)
 
