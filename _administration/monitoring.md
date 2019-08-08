@@ -33,7 +33,9 @@ menubar: administration_menu
 ./prometheus --config.file=prometheus.yml
 ```
 进入网址[localhost:9090](http://localhost:9090)看到如下界面即表示到这一步为止是成功的
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190723181055361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)在Expression框内输入需要查找的内容，点击Excute即可在Element中展示查找到的内容，当选择Graph时可以显示该内容一段时间内数值变化情况。
+![prometheus-server](/assets/images/prometheus-server.png)
+
+在Expression框内输入需要查找的内容，点击Excute即可在Element中展示查找到的内容，当选择Graph时可以显示该内容一段时间内数值变化情况。
 
 ## Prometheus-cpp Client 安装与使用
 详情见[https://prometheus.io/docs/instrumenting/clientlibs/](https://prometheus.io/docs/instrumenting/clientlibs/)
@@ -138,16 +140,28 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 ```
 
 启动之后打开[localhost:3000](http://localhost:3000)即可进入Grafana界面如下图所示（初始用户名/密码为admin/admin）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724144522161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)
+![grafana-login](/assets/images/grafana-login.png)
 登录进去之后在页面左边选择设置选择Data Sources
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724150704287.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)
+![grafana-dataSource](/assets/images/grafana-dataSource.png)
 
 点击add data source,选择Prometheus
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724150859838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)进行如下配置，然后保存
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724151513888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)点击左边+号选择Dashboard创建新的图像，选择Add Query增加新的查询
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724151946635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)在Queries to 里面选择Prometheus，然后在下方的栏目中输出你想要监控的数据即可查看情况
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724152541522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)具体结果如下图所示
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190724152626940.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)
+![grafana-addDataSource](/assets/images/grafana-addDataSource.png)
+
+进行如下配置，然后保存
+
+![grafana-addPrometheus](/assets/images/grafana-addPrometheus.png)
+
+点击左边+号选择Dashboard创建新的图像，选择Add Query增加新的查询
+
+![grafana-addDashboard](/assets/images/grafana-addDashboard.png)
+
+在Queries to 里面选择Prometheus，然后在下方的栏目中输出你想要监控的数据即可查看情况
+
+![grafana-searchData](/assets/images/grafana-searchData.png)
+
+具体结果如下图所示
+
+![grafana-addData](/assets/images/grafana-addData.png)
 ##  监控平台运行顺序即运行方式（供参考）
 
  1. 打开客户端（prometheus-cpp Client / Pegasus）
@@ -193,14 +207,22 @@ tar -xzf postman.tar.gz
 ./Postman
 ```
 进入如下界面
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190801102454471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)
+
+![postman](/assets/images/postman.png)
 ####   进入Grafana获取API key
 选择设置API Keys，然后add API key,填写name，Role选择admin
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190801102948852.png)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190801103101787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)会得到如下内容（马赛克里面的），只出现一次，请记得保存。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190801103326163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)
+
+![grafana-APIKey](/assets/images/grafana-APIKey.png)
+
+![grafana-addAPIKey](/assets/images/grafana-addAPIKey.png)
+
+会得到如下内容（马赛克里面的），只出现一次，请记得保存。
+
+![grafana-getAPIKey](/assets/images/grafana-getAPIKey.png)
 #### 使用 Postman发送请求
-![](https://img-blog.csdnimg.cn/20190801103712676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoZW5RU2htaWx5,size_16,color_FFFFFF,t_70)选择POST，输入网址
+![postman-sendRequest](/assets/images/postman-sendRequest.png)
+
+选择POST，输入网址
 
 ```
 http://your_host:3000/api/dashboard/dx
@@ -358,7 +380,7 @@ Accept              application/json
         "timezone": "",
         "title": "pegasus-prometheus",           //title为Dashboard名称
         "uid": null,                 // null表示新建
-        "version": null           //null表示新建
+        "version": null           // null 表示新建
       },
     "overwrite" : true
 }
@@ -366,7 +388,7 @@ Accept              application/json
 ```
 看到如下response即表示创建成功，进入Gafana就可以看到创建好的Dashboard和panel了。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190801105606496.png)
+![postman-getReply](/assets/images/postman-getReply.png)
 #### json文件
 现在有一份Grafana.json文件，里面按照falcon_screen.json将需要的panel都添加了，发送请求之后可以看到70+张panel已经成功创建。
 当前json文件中搜索条件为如下形式：
