@@ -38,9 +38,7 @@ arguments =
 ports = 34601
 
 ;meta app运行时需要的线程池
-pools = THREAD_POOL_DEFAULT,THREAD_POOL_META_SERVER,
-      THREAD_POOL_META_STATE,THREAD_POOL_FD,
-      THREAD_POOL_DLOCK,THREAD_POOL_FDS_SERVICE
+pools = THREAD_POOL_DEFAULT,THREAD_POOL_META_SERVER,THREAD_POOL_META_STATE,THREAD_POOL_FD,THREAD_POOL_DLOCK,THREAD_POOL_FDS_SERVICE
 run = true
 ;meta app的实例个数，每个实例的运行端口依次为ports, ports+1...
 ;可以用参数-app_list meta@1的方式启动指定的app
@@ -52,9 +50,7 @@ type = replica
 name = replica
 arguments =
 ports = 34801
-pools = THREAD_POOL_DEFAULT,THREAD_POOL_REPLICATION_LONG,
-      THREAD_POOL_REPLICATION,THREAD_POOL_LOCAL_APP,
-      THREAD_POOL_FD,THREAD_POOL_FDS_SERVICE,THREAD_POOL_COMPACT
+pools = THREAD_POOL_DEFAULT,THREAD_POOL_REPLICATION_LONG,THREAD_POOL_REPLICATION,THREAD_POOL_LOCAL_APP,THREAD_POOL_FD,THREAD_POOL_FDS_SERVICE,THREAD_POOL_COMPACT
 run = true
 count = 1
 
@@ -163,8 +159,7 @@ package_id =
 slog_dir = /home/work/ssd1/pegasus/@cluster@ 
 ;replica数据存储的文件夹路径列表，建议一块磁盘配置一个项，
 ;tag为磁盘的标记名
-data_dirs = tag1:/home/work/ssd2/pegasus/@cluster@,
-          tag2:/home/work/ssd3/pegasus/@cluster@ 
+data_dirs = tag1:/home/work/ssd2/pegasus/@cluster@,tag2:/home/work/ssd3/pegasus/@cluster@ 
 ;黑名单文件，文件中每行是一个需忽略掉的文件夹，主要用于过滤坏盘
 data_dirs_black_list_file = /home/mi/.pegasus_data_dirs_black_list
 
