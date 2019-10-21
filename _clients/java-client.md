@@ -735,15 +735,15 @@ public int batchMultiDel2(String tableName, List<Pair<byte[], List<byte[]>>> key
  * 注意：该方法不是原子的，有可能出现部分成功部分失败的情况，用户可以选择只使用成功的结果。
 
 ### delRange
-删除同一HashKey下，SortKey值在startSortKey和stopSortKey范围内的value。该函数默认以100作为一次删除的最大数量，当SortKeys总数量大于100时，将会分批次删除。每次的删除操作是同步的，删除过程中发生错误时，不影响已经删除的数据。
+删除同一HashKey下，SortKey值在startSortKey和stopSortKey范围内的数据。该函数首先从server获取当前在该范围内存在SortKey集合, 再分批次删除(100个SortKey作为一次, 最后不足100的作为一次)。删除过程中若发生错误，不影响已经删除的数据，同时会标记该范围内未删除的第一个SortKey。
 ```java
 /**
    * Delete key-values within range of startSortKey and stopSortKey under hashKey. Will terminate
    * immediately if any error occurs.
    *
    * @param tableName table name
-   * @param hashKey used to decide which partition the key may exist should not be null or empty.
-   * @param startSortKey the start sort key. null means "".
+   * @param hashKey used to decide which partition the key may exist, should not be null or empty.
+   * @param startSortKey the start sort key. null or "" means fetch to the first sort key.
    * @param stopSortKey the stop sort key. null or "" means fetch to the last sort key.
    * @param options del range options.
    * @throws PException throws exception if any error occurs.
@@ -756,7 +756,7 @@ public int batchMultiDel2(String tableName, List<Pair<byte[], List<byte[]>>> key
   * 传出参数：无。
 * 返回值：无。
 * 异常：如果出现异常，譬如参数错误、表名不存在、超时等，会抛出 PException。
-* 注意：该方法不是原子的，有可能出现部分成功部分失败的情况。其中`DelRangeOptions`中包含参数`nextSortkey`，用于标记上一次删除成功的批次(每100个是一个批次)对应的下一个值，当删除过程出现错误时，用户可以使用该参数继续接下来的操作。
+* 注意：该方法不是原子的，有可能出现部分成功部分失败的情况。其中`DelRangeOptions`中包含参数`nextSortkey`，用于标记该范围内未删除的第一个SortKey值，当删除过程出现错误时，用户可以使用该参数继续接下来的操作。
 
 ### incr
 单行原子增(减)操作。详细说明参见[单行原子操作](/api/single-atomic#原子增减)。
