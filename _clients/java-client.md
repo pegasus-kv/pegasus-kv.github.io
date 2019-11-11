@@ -1234,6 +1234,8 @@ PegasusTableInterface中同时提供了同步和异步的API。
 
 同步API与PegasusClientInterface基本一致，区别在于：不用指定tableName参数；可以单独指定超时时间。
 
+同时，openTable提供了warmup功能，在进行openTable时提前拉取路由表并建立连接。这样在第一次rpc调用时，可以避免由于执行上述步骤而导致的该次rpc调用过慢的问题。
+
 ### 基于Future的异步API
 异步API使用Future模式，具体来说是使用的 io.netty.util.concurrent.Future (参见 https://netty.io/4.1/api/index.html )。每个异步接口的返回值都是一个Future\<T\>，其中T是该操作返回结果的类型。Future具有如下特性：
  * 可以通过 addListener() 方法设置一个或者多个Listener，即异步回调函数。回调函数会在操作完成时被调用；如果在add时操作已经完成，回调函数就会被立即调用；回调函数被调用的顺序与添加的顺序一致。
