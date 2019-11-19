@@ -35,6 +35,7 @@ Options for subcommand 'shell':
 Shell工具采用子命令模式，进入子命令模式执行```help```后会显示帮助文档。（注：根据版本不同命令会有区别，以下为1.11.3版本）。对于每个子命令，也可以通过```-h```选项获取该子命令的帮助信息。
 
 ```
+Usage:
 	help
 	version
 	cluster_info           [-r|--resolve_ip] [-o|--output file_name] [-j|--json]
