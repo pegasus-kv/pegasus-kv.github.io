@@ -81,7 +81,13 @@ scrape_configs:
 
 在Expression框内输入需要查找的内容，点击Excute即可在Element中展示查找到的内容，当选择Graph时可以显示该内容一段时间内数值变化情况。
 
-另外，由于我们需要使用node exporter来获取一些关于硬件平台以及操作系统的metrics, 所以在部署Pegasus集群的时候，需要在每一台机器上单独开启一个node exporter实例，具体可参考: [Node Exporter] [https://github.com/prometheus/node_exporter]
+
+***注意***
+
+1.由于我们需要使用node exporter来获取一些关于硬件平台以及操作系统的metrics, 所以在部署Pegasus集群的时候，需要在每一台机器上单独开启一个node exporter实例，具体可参考: [Node Exporter](https://github.com/prometheus/node_exporter)
+
+2.[Alert Manager](https://github.com/prometheus/alertmanager) 为 Prometheus 报警组件，需单独部署（暂不提供方案，可参照官方文档自行搭建）。通过 Alert Manager，用户可以配置报警策略，接收邮件、短信等报警。
+
 
 ### Grafana安装与使用
 
