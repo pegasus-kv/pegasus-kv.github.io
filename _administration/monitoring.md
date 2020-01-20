@@ -16,7 +16,7 @@ Pegasus 使用 [Prometheus](https://prometheus.io/) 和 [Grafana](https://grafan
 
     Grafana 是一款开源的数据分析和展示平台。支持包括 Prometheus 在内的多个主流时序数据库源。通过对应的数据库查询语句，从数据源中获取展现数据。通过灵活可配置的 Dashboard，快速的将这些数据以图表的形式展示给用户。
 
-**注意**
+***注意***
 
 本文档仅提供一种使用 Prometheus 和 Grafana 进行 Doris 监控数据采集和展示的方式。原则上不开发、维护这些组件。更多关于这些组件的详细介绍，请移步对应官方文档进行查阅。
 
@@ -26,10 +26,11 @@ Pegasus 使用 [Prometheus](https://prometheus.io/) 和 [Grafana](https://grafan
 
 ### Prometheus安装与使用
 
-获取[Prometheus最新版本](https://prometheus.io/download/)
+获取Prometheus
 ```
-tar xvfz prometheus-*.tar.gz
-cd prometheus-*
+wget https://github.com/prometheus/prometheus/releases/download/v2.15.2/prometheus-2.15.2.linux-amd64.tar.gz
+tar xvfz prometheus-2.15.2.linux-amd64.tar.gz
+cd prometheus-2.15.2.linux-amd64
 ```
 
 修改prometheus.yml文件，如下所示： 
@@ -70,8 +71,6 @@ scrape_configs:
 
 修改完prometheus.yml之后，启动prometheus:
 ```
-# Start Prometheus.
-# By default, Prometheus stores its database in ./data (flag --storage.tsdb.path).
 ./prometheus --config.file=prometheus.yml
 ```
 
@@ -165,7 +164,7 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 
 1. 如果使用onebox进行测试，将src/server/config-server.ini中perf_counter_enable_prometheus改为true。
 
-2. 由于onebox部署在一台机器上，所以各replica、meta、collector的host相同，所以需要在prometheus.yml中为其配置不同的port。目前collector的prometheus port是9091, meta是[9092, 9094], replica则为[9095-9097]
+2. 由于onebox部署在一台机器上，因此各replica、meta、collector的host相同，所以需要在prometheus.yml中分别为其配置不同的port。目前collector的prometheus port是9091, meta是[9092, 9094], replica则为[9095-9097]
 
 3. 在集群部署的时候，在.cfg文件中添加 `perf_counter_enable_prometheus = true` 以及 `prometheus_host = your_host`。
 
