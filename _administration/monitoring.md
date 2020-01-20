@@ -144,7 +144,7 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 
 ### Pegasus Grafana DashBoard配置
 
-目前Pegasus拥有两个DashBoard，用于提供一些基本的监控信息。其相应的json文件: [Pegasus Cluster json文件](/asserts/json/pegasus-cluster.json)和[Pegasus Table json文件](/asserts/json/pegasus-table.json)
+目前Pegasus拥有两个DashBoard，用于提供一些基本的监控信息。其相应的json文件: [Pegasus json文件](/asserts/json/pegasus.json)
 
 下载了这两个json文件后，可以通过import的方式将其导入进去。其步骤如下：
 
@@ -159,6 +159,8 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 然后点击左下角的"import"按钮完成导入，并进入到Pegasus相应的DashBoard，其页面如下所示
 
 ![grafana-import-panel](/assets/images/grafana-dashboard-pegasus.png)
+
+从图中可以看出，Pegasus的DashBoard分为两个row: Pegasus-Cluster和Pegasus-Table，分别代表集群级别监控和表级监控。在左上角的cluster_name后输入具体的集群名字，便可以查看该集群相应的各种监控信息。
 
 ## ONEBOX与集群部署
 
