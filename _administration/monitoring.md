@@ -18,7 +18,7 @@ Pegasus 使用 [Prometheus](https://prometheus.io/) 和 [Grafana](https://grafan
 
 ***注意***
 
-本文档仅提供一种使用 Prometheus 和 Grafana 进行 Doris 监控数据采集和展示的方式。原则上不开发、维护这些组件。更多关于这些组件的详细介绍，请移步对应官方文档进行查阅。
+本文档仅提供一种使用 Prometheus 和 Grafana 进行 Pegasus 监控数据采集和展示的方式。原则上不开发、维护这些组件。更多关于这些组件的详细介绍，请移步对应官方文档进行查阅。
 
 ## 开始搭建
 
