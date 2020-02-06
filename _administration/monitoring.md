@@ -34,7 +34,7 @@ cd prometheus-2.15.2.linux-amd64
 ```
 
 修改prometheus.yml文件，如下所示： 
-```
+```yaml
 global:
   scrape_interval:     5s # By default, scrape targets every 15 seconds.
 
