@@ -165,7 +165,7 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 
 ## ONEBOX与集群部署
 
-1. 如果使用onebox进行测试，将src/server/config-server.ini中perf_counter_enable_prometheus改为true。
+1. 如果使用onebox进行测试，将src/server/config.mini.ini中perf_counter_enable_prometheus改为true。
 
 2. 由于onebox部署在一台机器上，因此各replica、meta、collector的host相同，所以需要在prometheus.yml中分别为其配置不同的port。目前collector的prometheus port是9091, meta是[9092, 9094], replica则为[9095-9097]
 
