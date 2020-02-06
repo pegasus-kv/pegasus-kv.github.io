@@ -143,7 +143,7 @@ INFO[07-24|14:37:00] cleanup of expired auth tokens done      logger=auth count=
 
 ![grafana-login](/assets/images/grafana-login.png)
 
-### Pegasus Grafana DashBoard配置
+### Grafana DashBoard配置
 
 目前Pegasus拥有一个DashBoard，用于提供一些基本的监控信息。其相应的json文件: [Pegasus json文件](https://github.com/pegasus-kv/pegasus-kv.github.io/tree/master/assets/json/grafana-dashboard.json)
 
