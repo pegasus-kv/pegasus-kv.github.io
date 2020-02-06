@@ -87,6 +87,7 @@ scrape_configs:
 
 2.[Alert Manager](https://github.com/prometheus/alertmanager) 为 Prometheus 报警组件，需单独部署（暂不提供方案，可参照官方文档自行搭建）。通过 Alert Manager，用户可以配置报警策略，接收邮件、短信等报警。
 
+3.目前我们的prometheus.yml使用的是静态配置的方式（static_configs），其缺点是当动态扩容缩容的时候需要手动去修改该静态配置。当前Prometheus支持多种动态服务发现方式，例如k8s、consul和dns等等，用户也可以根据自己需求去定制实现。详情请参考文档：[配置文件说明](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)、[实现动态服务发现](https://prometheus.io/blog/2018/07/05/implementing-custom-sd/)
 
 ### Grafana安装与使用
 
