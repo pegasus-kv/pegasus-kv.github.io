@@ -36,7 +36,10 @@ bulk_load_status
     BLS_DOWNLOADED,
     BLS_INGESTING,
     BLS_SUCCEED,
-    BLS_FAILED
+    BLS_FAILED,
+    BLS_PAUSING,
+    BLS_PAUSED,
+    BLS_CANCELED
 }
 ```
 我们为bulk load定义了多种状态，表app和每个partition都将有bulk load status，更多灌bulk load statu的描述请参见后文。
@@ -208,6 +211,29 @@ ingestion_status
 - 若在downloading阶段遇到问题，如远端文件不存在等问题，会直接转换成failed状态，删除本地和zk上的bulk load文件夹
 - 比较特殊的是ingesting，如果遇到的是timeout或者2pc导致的问题会回退到downloading阶段重新开始，若遇到的RocksDB的ingest问题则会直接认为bulk load失败
 
+为了更好的管理和控制bulk load，当集群负载较重时，为了保证集群的稳定性，可能需要暂停bulk load或者取消bulk load，结合暂停和取消功能的bulk load status转换如下图所示：
+```
+                    Invalid              
+                       |         pause  
+           cancel      v       ---------->
+         |<------- Downloading <---------- Paused
+         |             |         restart              
+         | cancel      v         
+         |<------- Downloaded  
+         |             |                 
+         | cancel      v         
+         |<------- Ingesting  
+         |             |                 
+         | cancel      v         
+         |<-------  Succeed  
+         |
+         v             
+      Canceled <--------------------------- Failed
+                          cancel
+```
+- 只有在app状态为downloading时，才能pause bulk load，在暂停之后可以restart bulk load，会重新到downloading状态
+- cancel可以从任何一个状态转换，取消bulk load会删除已经下载的文件，删除remote stroage的bulk load状态，就像bulk load成功或者失败一样，cancel bulk load能够确保bulk load停止。
+
 若meta server出现进程挂掉或者机器宕机等问题，新meta会从zk上获得bulk load状态信息。zk上的`bulk load`文件夹存储着每个正在进行bulk load的表和partition的信息，meta server需要将这些信息同步到内存中，并根据其中的状态继续进行bulk load。
 
 ## ingest的数据一致性
@@ -221,6 +247,5 @@ write(a=1) ingest(a=2) del(a)     -> a not existed
 ```
 
 ## TODO
-1. 添加cancel bulk load的实现
-2. 允许配置RocksDB ingest的更多参数
-3. 考虑bulk load如何计算CU
+1. 允许配置RocksDB ingest的更多参数
+2. 考虑bulk load如何计算CU
