@@ -10,7 +10,7 @@ Pegasus使用RocksDB作为存储引擎，用户数据存储在RocksDB SST文件�
 
 ## 概念说明
 ### 离线存储路径
-目前Bulk load支持使用fds作为离线生成SST文件的存储介质，并且要求生成的SST文件被组织成如下的路径：
+目前Bulk load支持使用[XiaoMi/FDS](http://docs.api.xiaomi.com/fds/introduction.html)作为离线生成SST文件的存储介质，并且要求生成的SST文件被组织成如下的路径：
 ```
 <bulk_load_root>/<cluster_name>/<app_name>/{bulk_load_info}
                                           /<partition_index>/<file_name>
@@ -83,7 +83,7 @@ bulk_load_status
           +----v----+
       --->| primary |<---
       |   +----^----+   |
-      |        |        | group request/response
+      |        |        | group bulk load request/response
       |        |        |     (downloading)
       |        |        |
 +-----v-----+  |  +-----v-----+
@@ -112,22 +112,22 @@ bulk_load_status
 
 ### ingest SST files
 ```
-          +---------+
-          |  meta   |
-          +--------+
-            |    |
-     ingest |    | bulk load request/response
-            |    |       (ingesting)
-            |    |
-          +-v----v--+
-      --->| primary |<---
-      |   +---^-^---+   |
-      |       | |       | group request/response
-      |       | | 2pc   |      (ingesting)
-      |       | |       |
-+-----v-----+ | | +-----v-----+
-| secondary |<- ->| secondary |
-+-----------+     +-----------+
+          +-----------+
+          |   meta    |
+          +-----------+
+             |     |
+     ingest  |     | bulk load request/response
+             |     |       (ingesting)
+             |     |
+          +--v-----v--+
+      --->|  primary  |<---
+      |   +---^---^---+   |
+      |       |   |       | group bulk load request/response
+      |       |   | 2pc   |      (ingesting)
+      |       |   |       |
++-----v-----+ |   | +-----v-----+
+| secondary |<-   ->| secondary |
++-----------+       +-----------+
 
 ```
 在ingesting阶段，meta与primary会有两种rpc，一种是和download阶段相同的bulk load request，用来交互ingest的状态，另一种是特殊的ingest rpc，用来执行真正的ingest操作。这两种rpc分别如下步骤的3和2所述，这里的2,3并不表示执行顺序。
@@ -153,7 +153,7 @@ bulk_load_status
           +----v----+
       --->| primary |<---
       |   +----^----+   |
-      |                 | group request/response
+      |                 | group bulk load/response
       |                 |       (succeed) 
       |                 |
 +-----v-----+     +-----v-----+
