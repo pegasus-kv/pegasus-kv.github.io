@@ -77,71 +77,74 @@ partition split的过程与learn比较类似，但也有一定的区别。learn�
 +--------+                          +-------+
 | parent |                          | child |
 +--------+                          +-------+
-    |         4. create child           |
+    |         1. create child           |
     |---------------------------------->|
     |                                   |
-    |         5. async learn            |
+    |         2. async learn            |
     |---------------------------------->|
     |           (2pc async)             |
     |                                   |
-    |      6. finish async learn        |
+    |      3. finish async learn        |
     |<----------------------------------|
     |     (send to primary parent)      |
     |                                   |
-    |  7. all child finish async learn  |
+    |  4. all child finish async learn  |
     |-----------------------------------|
     | （2pc sync, wait for sync_point)  |
     |                                   |
-    |  8. update child partition_count  |
+    |  5. update child partition_count  |
     |---------------------------------->|
     |                                   |
-    | 9. update partition_count ack     |
+    | 6. update partition_count ack     |
     |<--------------------------------->|
     |                                   |
 ```
 
 replica执行partition split的流程如上图所示：
-4. primary parent创建自己的child，child的ballot以及app_info.partition_count设为与parent相等，同时，让child的数据与parent位于同一块磁盘。并且，通过group_check通知各个secondary创建他们的child;
-5. child异步learn parent的状态
+1. primary parent创建自己的child，child的ballot以及app_info.partition_count设为与parent相等，同时，让child的数据与parent位于同一块磁盘。并且，通过group_check通知各个secondary创建他们的child;
+2. child异步learn parent的状态
  - 复制parent的prepare list;
  - apply parent的checkpoint;
  - 读取private log并relay log;
  - 复制parent内存中的mutation;
  - 在这期间，parent收到的写请求也会异步地复制给child
-6. 当child完成异步复制之后，会给primary parent发送通知
-7. 当primary parent收到所有child的通知之后，将写请求改为同步复制
+3. 当child完成异步复制之后，会给primary parent发送通知
+4. 当primary parent收到所有child的通知之后，将写请求改为同步复制
  - 在此后的2PC过程中，secondary都必须收到child的回复后才能向primary回复ACK，而primary也必须收到child的确认才可以commit
  - 我们将同步复制模式后的第一个decree称为**`同步点`**，当同步点mutation commit后，所有的child已拥有所需的全部数据
-8. primary通知所有的child更新partition_count为新partition_count，并把该信息写入磁盘文件.app_info中
-9. 当primary收到所有child更新partition_count成功的ack后，准备向meta_server注册child
+5. primary通知所有的child更新partition_count为新partition_count，并把该信息写入磁盘文件.app_info中
+6. 当primary收到所有child更新partition_count成功的ack后，准备向meta_server注册child
 
 
 ### Register child
 
 ```
-+----------------+ 10. register child +-------------+                         +-----------+
-|                |------------------->|             | 11. update child config |           |
++----------------+ 1. register child +-------------+                         +-----------+
+|                |------------------->|             | 2 . update child config |           |
 | parent primary |                    | meta_server |------------------------>| zookeeper |
 |                |<-------------------|             |                         |           |
 +----------------+        ack         +-------------+                         +-----------+
         |
-        | 12. active child
+        | 3. active child
 +-------v---------+
 |  child primary  |
 +-----------------+
 ```
 注册child的流程如上图所示：
-10. primary向meta server注册child partition
+1. primary向meta server注册child partition
+
  - 将child的ballot设为ballot(parent) + 1
  - parent暂时拒绝读写访问，此时，parent和child都不响应client的读写请求
  - 向meta_server发送注册child的请求
-11. meta_server收到注册请求后，将更新child的partition_configuration，并将它写入zookeeper和内存，然后返回ERR_OK给primary parent
-12. primary从meta_server收到注册成功的回复，先激活child：
+2. meta_server收到注册请求后，将更新child的partition_configuration，并将它写入zookeeper和内存，然后返回ERR_OK给primary parent
+
+3. primary从meta_server收到注册成功的回复，先激活child：
+
  - 将对应的child的状态由PS_PARTITION_SPLIT改为PS_PRIMARY；
  - 这个升级为PS_PRIMARY的child会通过group_check让其它机器上的child升级为PS_SECONARY。此时, child partition可以开始提供正常的读写服务
-13.	primary parent通知所有的seconadary更新app_info.partition_count，并恢复读写服务。
+4. primary parent通知所有的seconadary更新app_info.partition_count，并恢复读写服务。
 
-在第13步之前，parent与child所对应的所有读写请求都由parent处理；在第13步之后，parent将拒绝child对应的请求。
+在第3步之前，parent与child所对应的所有读写请求都由parent处理；在第3步之后，parent将拒绝child对应的请求。
 
 ## split过程中如何处理client请求
 
