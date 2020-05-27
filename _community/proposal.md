@@ -242,9 +242,9 @@ Most of the current code is Apache 2.0 licensed and the copyright is assigned to
 If the project enters incubator, XiaoMi will transfer the source code & trademark
 ownership to ASF via a Software Grant Agreement.
 
-But due to historical issues, Pegasus was based on MIT licensed codes that were initially
-written by [microsoft/rDSN](https://github.com/microsoft/rDSN). These codes have long been actively developed by Pegasus
-because the original project is unmaintained (modified codes are licensed under AL 2.0).
+But due to historical issues, Pegasus was based on an MIT licensed code that was initially
+written by [microsoft/rDSN](https://github.com/microsoft/rDSN), which has long been actively developed by Pegasus
+because the original project is unmaintained (modified code is licensed under AL 2.0).
 We aren't sure if we should request microsoft for any CLA during IP-clearance process.
 
 ## Initial Committers
