@@ -14,7 +14,7 @@ be horizontally scalable, strongly consistent and high-performance.
 ## Proposal
 
 Pegasus is a key-value database that delivers low-latency data access together
-with horizontal scalability, using hash-based partitioning. Pegasus uses PacificA
+with horizontal scalability, using hash-based partitioning. Pegasus uses [PacificA](https://www.microsoft.com/en-us/research/wp-content/uploads/2008/02/tr-2008-25.pdf)
 protocol for strong consistency and RocksDB as the underlying storage engine.
 
 We propose to contribute the Pegasus codebase and associated artifacts
@@ -91,7 +91,7 @@ Pegasus seeks to develop developer and user communities during incubation.
 Currently most of the core developers of Pegasus are working in
 XiaoMi KV-Storage Team. Yingchun Lai is one of the [Apache Kudu](https://github.com/apache/kudu) PMC members.
 Zuoyan Qin is an experienced open source developer who created [sofa-pbrpc](https://github.com/baidu/sofa-pbrpc)
-inside baidu. Wei Huang is also an active contributor of [Apache Doris (Incubating)](https://github.com/apache/incubator-doris).
+inside Baidu. Wei Huang is also an active contributor of [Apache Doris (Incubating)](https://github.com/apache/incubator-doris).
 
 - Zuoyan Qin (<https://github.com/qinzuoyan>)
 - Yuchen He (<https://github.com/hycdong>)
@@ -154,7 +154,7 @@ enthusiasm for the Pegasus project.
 Pegasus is proposing to enter incubation at Apache in order to help efforts
 to diversify the committer-base, not so much to capitalize on the Apache brand.
 The Pegasus project is in production use already inside XiaoMi,
-but is not expected to be an Baidu product for external customers.
+but is not expected to be an XiaoMi product for external customers.
 As such, the Pegasus project is not seeking to use the Apache brand as
 a marketing tool.
 
@@ -170,7 +170,7 @@ The following links provide more information about Pegasus in open source:
 Besides the core codebase, Pegasus also hosts its side projects on github under XiaoMi Group.
 Specifically, the initial source includes:
 
-Client libraries with different Languages:
+Client libraries with different languages:
 
 - Java-Client: <https://github.com/XiaoMi/pegasus-java-client>
 - Scala-Client: <https://github.com/XiaoMi/pegasus-scala-client>
@@ -206,7 +206,16 @@ Pegasus has the following external dependencies.
 - POCO (Boost Software License)
 - rapidjson (Tencent)
 - libevent (BSD)
-- gperftools (BSD)
+- Google gperftools (BSD)
+- cameron314/concurrentqueue (BSD)
+- cameron314/readerwriterqueue (BSD)
+- XiaoMi/galaxy-fds-sdk-cpp (No License)
+- jupp0r/prometheus-cpp (MIT)
+- curl ([The curl license](https://curl.haxx.se/docs/copyright.html))
+- nlohmann/json (MIT)
+- abseil-cpp (Apache 2.0)
+- antirez/linenoise (BSD-2)
+- antirez/sds (BSD-2)
 
 Build and test dependencies:
 
