@@ -116,7 +116,7 @@ We currently support offline analysis on checkpoint powered by Apache Spark.
 The core developers of XiaoMi Pegasus team work full time on this project.
 There is very little risk of Pegasus getting orphaned since
 XiaoMi is extensively using it in production, with currently a scale of
-70+ deployments, 800+ applications (about 70+TB).
+70+ clusters, 800+ tables (about 70+TB).
 Furthermore, since Pegasus was open sourced at the beginning of October 2017,
 it has received more than 1200+ stars and been forked nearly 200+ times.
 We plan to extend and diversify this community further through Apache.
@@ -184,7 +184,7 @@ Components of Pegasus:
 - RocksDB: <https://github.com/XiaoMi/pegasus-rocksdb>
 
 rDSN was initially a distributed framework developed by Zhenyu Guo from Microsoft,
-and it is heavily refactored and developed to be more fit in Pegasus. rDSN is MIT&Apache2.0 dual-licensed.
+and it is heavily refactored and developed to be more fit for Pegasus. rDSN is MIT&Apache2.0 dual-licensed.
 The code licensed Apache2.0 belongs to XiaoMi and the copyright of MIT-licensed code is assigned to Microsoft.
 It's in our plan to merge Pegasus and rDSN as one project.
 
