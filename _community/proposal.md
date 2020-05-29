@@ -89,7 +89,7 @@ Pegasus seeks to develop developer and user communities during incubation.
 ### Core Developers
 
 Currently most of the core developers of Pegasus are working in
-the KV-Storage Team of Cloud Platform Department of Xiaomi Corp. Yingchun Lai is one of the [Apache Kudu](https://github.com/apache/kudu) PMC members.
+the KV-Storage Team of Xiaomi. Yingchun Lai is one of the [Apache Kudu](https://github.com/apache/kudu) PMC members.
 Zuoyan Qin is an experienced open source developer who created [sofa-pbrpc](https://github.com/baidu/sofa-pbrpc)
 in his last job in Baidu. Wei Huang is also an active contributor of [Apache Doris (Incubating)](https://github.com/apache/incubator-doris).
 
