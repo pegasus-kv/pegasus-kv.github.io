@@ -19,7 +19,7 @@ protocol for strong consistency and [RocksDB](https://github.com/facebook/rocksd
 
 We propose to contribute the Pegasus codebase and associated artifacts
 (e.g., documentation, website content, etc.) to the Apache Software Foundation,
-and aim to build an open community around Pegasus’s continued development
+and aim to build an open community around Pegasus's continued development
 in the 'Apache Way'.
 
 ## Background
@@ -83,7 +83,7 @@ We will adopt the ASF source release process upon joining the incubator.
 
 ### Code Reviews
 
-Pegasus’s code reviews are currently public on Github <https://github.com/XiaoMi/pegasus/pulls>.
+Pegasus's code reviews are currently public on Github <https://github.com/XiaoMi/pegasus/pulls>.
 
 ### Community
 
