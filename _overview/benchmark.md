@@ -187,20 +187,25 @@ menubar: overview_menu
 
 ![5-node-read](/assets/images/benchmark/5-node-read.png)
 
-由上图可以看到，在该测试场景下，写最大QPS≈43K，读最大QPS≈370K
+由上图可以看到，在该测试场景下，写最大QPS≈43K，读最大QPS≈370K，你也可以根据QPS的大小合理估算对应的延迟。
 
 ### RocksDB限速
 
 Pegasus底层采用RocksDB做存储引擎，当数据写入增多，会触发compaction操作，占用较多磁盘IO，出现较多的毛刺现象。该项测试展示了开启RocksDB的限速后，在compaction负载较大时将会显著的降低毛刺现象。
 
-下图分别展示了无限速、500MB限速、500MB限速同时开启auto-tune功能，三种场景的写P99延迟(注意：延迟性能数据的测试场景为：3client*20thread，QPS≈44K)：
+下图分别展示了无限速、500MB限速、500MB限速同时开启auto-tune功能，三种场景的IO使用率和写P99延迟(注意：测试场景为：3client*20thread，QPS≈44K)：
+
+磁盘IO占用：
+![io-no-limit](/assets/images/benchmark/io-no-limit.png)
+![io-limit-500MB](/assets/images/benchmark/io-limit-500MB.png)
+![io-limit-500MB-auto](/assets/images/benchmark/io-limit-500MB-auto.png)
+
+P99延迟：
 ![no-limit-set](/assets/images/benchmark/no-limit-set.png)
-
 ![500-limit-set](/assets/images/benchmark/500-limit-set.png)
-
 ![500-limit-auto-set](/assets/images/benchmark/500-limit-auto-set.png)
 
-可以明显发现，写延迟的毛刺显现象被显著降低。
+可以发现，磁盘IO使用率被降低，相应的写延迟的毛刺现象也被大大缓解。
 
 我们从YCSB的测试结果：
 ![limit](/assets/images/benchmark/limit.png)
