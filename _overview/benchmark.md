@@ -29,7 +29,6 @@ menubar: overview_menu
 * 运行时长单位：小时。
 * QPS单位：条/秒。
 * 延迟单位：微秒。
-* 默认value大小：320B
 
 ## 测试结果
 
