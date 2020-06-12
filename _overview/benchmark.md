@@ -215,7 +215,7 @@ P99延迟：
 
 但是**需要注意**的是：
 
-auto-tune功能在单条数据较大的场景下可能会引发write stall（在我们的测试中，当单条value=10KB，QPS=10K时，发生write stall，关闭Auto-Tune后不会产生write stall），所以请合理评估是否开启auto-tune
+auto-tune功能在单条数据较大的场景下可能会引发[write stall](https://github.com/facebook/rocksdb/wiki/Write-Stalls)（在我们的测试中，当单条value=10KB，QPS=10K时，发生write stall，关闭Auto-Tune后不会产生write stall），所以请合理评估是否开启auto-tune
 
 ### 服务端机器数
 该项测试旨在观察，不同机器数量对读写请求性能的影响。
