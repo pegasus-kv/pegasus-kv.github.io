@@ -50,5 +50,6 @@
     - name: 白名单
       link: /administration/whitelist
     - name: Backup Request
-+     link: /administration/backup-request
+      link: /administration/backup-request
+
 
