@@ -25,7 +25,7 @@ public PegasusTableInterface openTable(String tableName, int backupRequestDelayM
 
 # 性能测试
 
-下面表格里展示了是否打开backup request的性能对比，这里我们选取了未打开backup request时读请求的p999时间作为backup request的delay时间。数据显示，打开backup request之后get请求的p9999时延降低到了未打开时的15%左右。
+下面表格里展示了某场景下是否打开backup request的性能对比，这里我们选取了未打开backup request时读请求的p999时间作为backup request的delay时间。数据显示，打开backup request之后get请求的p9999时延降低到了未打开时的15%左右。
 
 |  test case   | enable backup request  |  read p9999  |  
 | ---- | ---- | ---- |
