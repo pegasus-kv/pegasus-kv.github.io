@@ -5,7 +5,7 @@ menubar: administration_menu
 ---
 
 # 背景
-在当前的pegasus实现中，由于向secondary读取会导致不一致的情况发生，所以目前Pegasus仅仅支持对primary副本的读取。但是在某些情况下（例如：负载均衡、热点写入等）经常会导致primary不稳定。所以我们希望在primary不稳定时能够读取secondary，通过牺牲部分强一致性来降低请求的长尾并提高系统的可用性。backup request便是用来实现此功能的。
+在当前的Pegasus实现中，由于向secondary读取会导致不一致的情况发生，所以目前Pegasus仅仅支持对primary副本的读取。但是在某些情况下（例如：负载均衡、热点写入等）经常会导致primary不稳定。所以我们希望在primary不稳定时能够读取secondary，通过牺牲部分强一致性来降低请求的长尾并提高系统的可用性。backup request便是用来实现此功能的。
 
 # 设计实现
 
@@ -14,7 +14,7 @@ backup reqeust的实现原理比较简单：当client向primary发送请求后�
 这里发送secondary请求的延时我们建议选择p999，因为backup request操作是用来实现消除长尾的，并不是提升集群性能的。如果将该值设置过低，则会由于backup request的请求量过大而导致集群压力增大（假设选择p50作为其延时，这样便会有50%的请求向secondary发送请求，系统负载便会增大50%）。
 
 # 如何使用
-在pegasus java client中，我们增加了一个接口，通过该接口可以打开某个表的backup reqeust功能。其实现如下：
+在Pegasus java client中，我们增加了一个接口，通过该接口可以打开某个表的backup reqeust功能。其实现如下：
 ```java
 public PegasusTableInterface openTable(String tableName, int backupRequestDelayMs) throws PException;
 ```
