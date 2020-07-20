@@ -14,7 +14,7 @@ backup reqeust的实现原理比较简单：对于读操作（目前写操作不
 这里发送secondary请求的延时我们建议选择p999，因为backup request操作是用来实现消除长尾的，并不是提升集群性能的。如果将该值设置过低，则会由于backup request的请求量过大而导致集群压力增大（假设选择p50作为其延时，这样便会有50%的请求向secondary发送请求，系统负载便会增大50%）。
 
 # 如何使用
-在Pegasus java client中，我们增加了一个接口，通过该接口可以打开某个表的backup reqeust功能。其实现如下：
+在Pegasus java client v2.0.0中，我们增加了一个接口，通过该接口可以打开某个表的backup reqeust功能。其实现如下：
 ```java
 public PegasusTableInterface openTable(String tableName, int backupRequestDelayMs) throws PException;
 ```
@@ -27,7 +27,7 @@ public PegasusTableInterface openTable(String tableName, int backupRequestDelayM
 
 set/get operation:
 
-|  test case   | enable backup request  |  qps | read/write propotion  |  read avg  |  read p95  |  read p99  |  read p999  |  read p9999  |  write avg  |  write p95  |  write p99  |  write p999  |  write p9999  |  
+|  test case   | enable backup request  |  read/write propotion  | qps |  read avg  |  read p95  |  read p99  |  read p999  |  read p9999  |  write avg  |  write p95  |  write p99  |  write p999  |  write p9999  |  
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- |
 | 3-clients 15-threads | no | 1:3 | 7076 | 880 | 428 | 727 | 138495 | 988671 | 2495 | 6319 | 9023 | 36319 | 531455|
 | 3-clients 15-threads | yes, delay 138ms | 1:3 | 6987 | 1010 | 403  | 7747 | 138751 | 153599 | 2476 | 6859 | 9119 | 13759 | 185855 |
@@ -38,7 +38,7 @@ set/get operation:
 
 Multi-get/Batch-Set operation: 
 
-|  test case  | enable backup request  |  qps | read/write porpotion  |  read avg  |  read p95  |  read p99  |  read p999  |  read p9999  |  write avg  |  write p95  |  write p99  |  write p999  |  write p9999  |  
+|  test case  | enable backup request  | read/write porpotion  |  qps |  read avg  |  read p95  |  read p99  |  read p999  |  read p9999  |  write avg  |  write p95  |  write p99  |  write p999  |  write p9999  |  
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- |
 | 3-clients  7-threads | no | 20:1 | 24113 | 200 | 277 | 410 | 2317 | 21647 | 2034 | 4283 | 6427 | 18271 | 62687 |
 | 3-clients  7-threads | yes, deley 2ms | 20:1 | 23756 | 197 | 268 | 351 | 2173 | 5759 | 2187 | 4531 | 6551 | 21551 | 63999 |
