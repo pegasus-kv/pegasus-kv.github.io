@@ -386,7 +386,7 @@ public boolean multiGet(String tableName, byte[] hashKey,
       * sortKeyFilterType：SortKey的过滤类型，包括无过滤、任意位置匹配、前缀匹配和后缀匹配，默认无过滤。
       * sortKeyFilterPattern：SortKey的过滤模式串，空串相当于无过滤。
       * noValue：只返回HashKey和SortKey，不返回Value数据，默认为false。
-      * reverse：是否逆向扫描数据库，从后往前查找数据。但是查找得到的结果在list中还是按照SortKey从小到大顺序存放。从Pegasus Server 1.8.0时开始支持。
+      * reverse：是否逆向扫描数据库，若为true，将根据stopSortKey从后往前查找数据。但是查找得到的结果在list中还是按照SortKey从小到大顺序存放。默认为false，将根据startSortKey从前向后查找数据。从Pegasus Server 1.8.0时开始支持。
     * 返回值：如果读取了所有满足条件的数据，返回true；如果只读取了部分满足条件的数据，返回false。
     * 异常：如果出现异常，譬如网络错误、超时错误、服务端错误等，会抛出 PException。
     * 示例：获取某个HashKey下的所有数据（注意如果数据条数太多容易超时）
