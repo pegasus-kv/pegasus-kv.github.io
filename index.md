@@ -1,4 +1,0 @@
----
-layout: front
-toc: false
----
